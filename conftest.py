@@ -1,6 +1,6 @@
 import pytest
 import os
-import backend
+import elections_api
 
 @pytest.fixture(scope='session')
 def django_db_setup():
