@@ -4,7 +4,7 @@ import elections_api
 
 @pytest.fixture(scope='session')
 def django_db_setup():
-    backend.settings.DATABASES['default'] = {
+    elections_api.settings.DATABASES['default'] = {
         'ENGINE': 'django_db_geventpool.backends.postgresql_psycopg2',
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
         'NAME': os.environ.get('POSTGRES_NAME'),
