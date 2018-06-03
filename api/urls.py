@@ -16,9 +16,9 @@ router.register(r'committeeslist', views.CommitteesListViewSet)
 router.register(r'committeehistory', views.CommitteeHistoryViewSet)
 router.register(r'ballots', views.BallotsViewSet)
 
-schema_view = get_swagger_view(title="elections API")
+schema_view = get_swagger_view(title='Hack Oregon 2018 Local Elections APIs')
 
 urlpatterns = [
     url(r'^schema/', schema_view),
-    url(r'^api/', include(router.urls)),
+    url(r'^', include(router.urls)),
 ]
