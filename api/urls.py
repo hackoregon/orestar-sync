@@ -19,6 +19,6 @@ router.register(r'ballots', views.BallotsViewSet)
 schema_view = get_swagger_view(title='Hack Oregon 2018 Local Elections APIs')
 
 urlpatterns = [
-    url(r'^schema/', schema_view),
+    url(r'^$', schema_view),
     url(r'^', include(router.urls)),
 ]
