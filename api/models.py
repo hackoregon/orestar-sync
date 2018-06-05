@@ -5,8 +5,6 @@
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
-from decimal import Decimal
-
 from django.db import models
 
 
@@ -136,13 +134,13 @@ class TransactionDetails(models.Model):
     @property
     def total_amount(self):
         if self.amount.is_nan():
-            return Decimal(0.0)
+            return "not available"
         return self.amount        
 
     @property
     def total_aggregate(self):
         if self.aggregate.is_nan():
-            return Decimal(0.0)
+            return "not available"
         return self.aggregate
 
     class Meta:
@@ -163,7 +161,7 @@ class Transactions(models.Model):
     @property
     def total_amount(self):
         if self.amount.is_nan():
-            return Decimal(0.0)
+            return "not available"
         return self.amount
 
     class Meta:
