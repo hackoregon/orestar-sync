@@ -6,7 +6,8 @@ from api.models import (Transactions,
                         Donor,
                         CommitteesList,
                         CommitteeHistory,
-                        Ballots,)
+                        Ballots,
+                        TotalContributions,)
 from api.serializers import (TransactionsSerializer, 
                             TransactionDetailSerializer,
                             StatementOfOrgSerializer, 
@@ -15,7 +16,8 @@ from api.serializers import (TransactionsSerializer,
                             DonorSerializer,
                             CommitteesListSerializer, 
                             CommitteeHistorySerializer,
-                            BallotsSerializer,)
+                            BallotsSerializer,
+                            TotalContributionsSerializer,)
 
 from rest_framework.decorators import api_view, detail_route
 from rest_framework import generics
@@ -40,7 +42,9 @@ class TransactionDetailViewSet(viewsets.ModelViewSet):
     queryset = TransactionDetails.objects.all()
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
-    search_fields = '__all__'    
+    search_fields = '__all__'
+    filtering_fields = '__all__'
+    
 class StatementOfOrgViewSet(viewsets.ModelViewSet):
     serializer_class = StatementOfOrgSerializer
     queryset = StatementOfOrg.objects.all()
@@ -96,3 +100,11 @@ class BallotsViewSet(viewsets.ModelViewSet):
     ordering_fields = '__all__'
     search_fields = '__all__'
     filtering_fields = '__all__'
+
+class TotalContributionsViewSet(viewsets.ModelViewSet):
+    serializer_class = TotalContributionsSerializer
+    queryset = TotalContributions.objects.all()
+    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    ordering_fields = '__all__'
+    search_fields = '__all__'
+    filtering_fields = '__all__'    

@@ -167,3 +167,12 @@ class Transactions(models.Model):
     class Meta:
         managed = False
         db_table = 'transactions'
+
+
+class TotalContributions(models.Model):
+    total = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    filer_name = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'total_contributions'
