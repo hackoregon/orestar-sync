@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TotalContributions',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.IntegerField(primary_key=True, serialize=False)),
                 ('total', models.DecimalField(blank=True, decimal_places=2, max_digits=15, null=True)),
                 ('filer_name', models.CharField(blank=True, max_length=255, null=True)),
             ],
