@@ -177,3 +177,14 @@ class TotalContributions(models.Model):
     class Meta:
         managed = False
         db_table = 'total_contributions'
+
+
+class ElectionCycles(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
+    type = models.CharField(max_length=255, blank=True, null=True)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    
+    class Meta:
+        managed = False
+        db_table = 'election_cycles'

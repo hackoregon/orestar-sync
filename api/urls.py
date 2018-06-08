@@ -16,6 +16,7 @@ router.register(r'committeeslist', views.CommitteesListViewSet)
 router.register(r'committeehistory', views.CommitteeHistoryViewSet)
 router.register(r'ballots', views.BallotsViewSet)
 router.register(r'totalcontributions', views.TotalContributionsViewSet)
+router.register(r'electioncycles', views.ElectionCyclesViewSet)
 
 schema_view = get_swagger_view(title='Hack Oregon 2018 Local Elections APIs')
 
