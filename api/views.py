@@ -107,4 +107,4 @@ class TotalContributionsViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'    
+    filtering_fields = '__all__'
