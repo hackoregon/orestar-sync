@@ -1,13 +1,13 @@
 from rest_framework import serializers
 from api.models import (Transactions, TransactionDetails, StatementOfOrg,
                        Payee, ElectionActivity, Donor, CommitteesList,
-                        CommitteeHistory, Ballots, TotalContributions,)
+                       CommitteeHistory, Ballots, TotalContributions,
+                       ElectionCycles,)
 
 class TransactionsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Transactions
-#        fields = '__all__'
         fields = (
             "transaction_id", "committee_id", "transaction_date",
             "status", "filer_committee", "contributor_payee",
@@ -18,7 +18,6 @@ class TransactionDetailSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = TransactionDetails
-#        fields = '__all__'
         fields = (
             "transaction_id", "payee_id", "donor_id",
             "address", "address_book_type", "agent",
@@ -76,4 +75,10 @@ class TotalContributionsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TotalContributions
+        fields = '__all__'
+
+class ElectionCyclesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ElectionCycles
         fields = '__all__'

@@ -7,7 +7,8 @@ from api.models import (Transactions,
                         CommitteesList,
                         CommitteeHistory,
                         Ballots,
-                        TotalContributions,)
+                        TotalContributions,
+                        ElectionCycles,)
 from api.serializers import (TransactionsSerializer, 
                             TransactionDetailSerializer,
                             StatementOfOrgSerializer, 
@@ -17,7 +18,8 @@ from api.serializers import (TransactionsSerializer,
                             CommitteesListSerializer, 
                             CommitteeHistorySerializer,
                             BallotsSerializer,
-                            TotalContributionsSerializer,)
+                            TotalContributionsSerializer,
+                            ElectionCyclesSerializer,)
 
 from rest_framework.decorators import api_view, detail_route
 from rest_framework import generics
@@ -108,3 +110,12 @@ class TotalContributionsViewSet(viewsets.ModelViewSet):
     ordering_fields = '__all__'
     search_fields = '__all__'
     filtering_fields = '__all__'
+
+class ElectionCyclesViewSet(viewsets.ModelViewSet):
+    serializer_class = ElectionCyclesSerializer
+    queryset = ElectionCycles.objects.all()
+    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    ordering_fields = '__all__'
+    search_fields = '__all__'
+    filtering_fields = '__all__'
+
