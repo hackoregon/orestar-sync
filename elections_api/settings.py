@@ -106,7 +106,8 @@ DATABASES = {
         'NAME': os.environ.get('POSTGRES_NAME'),
         'USER': os.environ.get('POSTGRES_USER'),
         'HOST': os.environ.get('POSTGRES_HOST'),
-        'PORT': os.environ.get('POSTGRES_PORT')
+        'PORT': os.environ.get('POSTGRES_PORT'),
+        'options': '-c search_path=django',
     }
 }
 
