@@ -107,7 +107,9 @@ DATABASES = {
         'USER': os.environ.get('POSTGRES_USER'),
         'HOST': os.environ.get('POSTGRES_HOST'),
         'PORT': os.environ.get('POSTGRES_PORT'),
-        'options': '-c search_path=django',
+        'OPTIONS': {
+            'options': '-c search_path=django,public',
+        },
     }
 }
 
@@ -123,8 +125,9 @@ if DEBUG == False:
             'PORT': os.environ.get('POSTGRES_PORT'),
             'CONN_MAX_AGE': 0,
             'OPTIONS': {
-                'MAX_CONNS': 20
-            }
+                'MAX_CONNS': 20,
+                'options': '-c search_path=django,public',
+            },
         }
     }
 
