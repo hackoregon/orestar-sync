@@ -9,8 +9,15 @@ from django.db import models
 
 
 class Ballots(models.Model):
-    candidate_name = models.CharField(primary_key=True, max_length=255)
-    json = models.TextField(blank=True, null=True)  # This field type is a guess.
+    name = models.CharField(primary_key=True, max_length=255)
+    district = models.CharField(max_length=64, blank=True, null=True)
+    party = models.CharField(max_length=4, blank=True, null=True)
+    race = models.CharField(max_length=128, blank=True, null=True)
+    type = models.CharField(max_length=2, blank=True, null=True)
+    won = models.IntegerField()
+    writein = models.IntegerField()
+    year = models.CharField(max_length=4, blank=True, null=True)
+    votes = models.TextField(blank=True, null=True)  # This field type is a guess.
 
     class Meta:
         managed = False
@@ -180,6 +187,27 @@ class TotalContributions(models.Model):
         managed = False
         db_table = 'total_contributions'
 
+class TotalContributionsMonthly(models.Model):
+    committee_id = models.IntegerField(primary_key=True)
+    sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    filer_name = models.CharField(max_length=255, blank=True, null=True)
+    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+    month = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'total_contributions_raw_month'
+        
+class TotalContributionsYearly(models.Model):
+    committee_id = models.IntegerField(primary_key=True)
+    sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    filer_name = models.CharField(max_length=255, blank=True, null=True)
+    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+    year = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'total_contributions_raw_year'
 
 class ElectionCycles(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
