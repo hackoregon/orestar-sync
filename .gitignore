@@ -108,5 +108,6 @@ ENV/
 backend-exemplar-2018.code-workspace
 
 env.production
+./api/transaction_analysis/elections_login.json
 
 temp_models/
