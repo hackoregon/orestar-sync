@@ -7,7 +7,7 @@ from api.models import (Transactions,
                         CommitteesList,
                         CommitteeHistory,
                         Ballots,
-                        TotalContributions,
+                        ContributorBreakdown,
                         ElectionCycles,
                         TotalContributionsMonthly,
                         TotalContributionsYearly,
@@ -21,7 +21,7 @@ from api.serializers import (TransactionsSerializer,
                             CommitteesListSerializer,
                             CommitteeHistorySerializer,
                             BallotsSerializer,
-                            TotalContributionsSerializer,
+                            ContributorBreakdownSerializer,
                             ElectionCyclesSerializer,
                             TotalContributionsMonthlySerializer,
                             TotalContributionsYearlySerializer,
@@ -114,10 +114,9 @@ class BallotsViewSet(viewsets.ModelViewSet):
         serializer = BallotsSerializer(names)
         return Response(serializer.data)
 
-
-class TotalContributionsViewSet(viewsets.ModelViewSet):
-    serializer_class = TotalContributionsSerializer
-    queryset = TotalContributions.objects.all()
+class ContributorBreakdownViewSet(viewsets.ModelViewSet):
+    serializer_class = ContributorBreakdownSerializer
+    queryset = ContributorBreakdown.objects.all()
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'

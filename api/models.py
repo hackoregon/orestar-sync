@@ -177,16 +177,15 @@ class Transactions(models.Model):
         db_table = 'transactions'
 
 
-class TotalContributions(models.Model):
+class ContributorBreakdown(models.Model):
     committee_id = models.IntegerField(primary_key=True)
     sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     filer_name = models.CharField(max_length=255, blank=True, null=True)
     donor_category = models.CharField(max_length=255, blank=True, null=True)
-    ratio = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
-    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+    ratio = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     class Meta:
         managed = False
-        db_table = 'total_contributions'
+        db_table = 'contributor_breakdown'
 
 class TotalContributionsMonthly(models.Model):
     id = models.IntegerField(primary_key=True)
