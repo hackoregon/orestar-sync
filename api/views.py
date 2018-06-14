@@ -117,16 +117,7 @@ class ContributorBreakdownViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filter_fields = '__all__'
-
-"""
-    def retrieve(self, request, pk=None):
-        print(self.kwargs)
-        print(request.query_params)
-        queryset = ContributorBreakdown.objects.all().filter(committee_id=pk)
-        serializer = ContributorBreakdownSerializer(queryset, many=True)
-        return Response(serializer.data)
-"""        
+    filter_fields = '__all__'        
 
 class ElectionCyclesViewSet(viewsets.ModelViewSet):
     serializer_class = ElectionCyclesSerializer
