@@ -11,7 +11,8 @@ from api.models import (Transactions,
                         ElectionCycles,
                         TotalContributionsMonthly,
                         TotalContributionsYearly,
-                        TotalContributionsRawInState,)
+                        TotalContributionsRawInState,
+                        TotalContributionsRawMonthRaceType,)
 from api.serializers import (TransactionsSerializer,
                             TransactionDetailSerializer,
                             StatementOfOrgSerializer,
@@ -25,7 +26,8 @@ from api.serializers import (TransactionsSerializer,
                             ElectionCyclesSerializer,
                             TotalContributionsMonthlySerializer,
                             TotalContributionsYearlySerializer,
-                            TotalContributionsRawInStateSerializer,)
+                            TotalContributionsRawInStateSerializer,
+                            TotalContributionsRawMonthRaceTypeSerializer,)
 
 from rest_framework.decorators import api_view, detail_route
 from rest_framework import generics
@@ -109,11 +111,6 @@ class BallotsViewSet(viewsets.ModelViewSet):
     search_fields = '__all__'
     filtering_fields = '__all__'
 
-    def get(self, request, name=None):
-        names = Ballots.objects.all().filter(name=name)
-        serializer = BallotsSerializer(names)
-        return Response(serializer.data)
-
 class ContributorBreakdownViewSet(viewsets.ModelViewSet):
     serializer_class = ContributorBreakdownSerializer
     queryset = ContributorBreakdown.objects.all()
@@ -121,6 +118,13 @@ class ContributorBreakdownViewSet(viewsets.ModelViewSet):
     ordering_fields = '__all__'
     search_fields = '__all__'
     filtering_fields = '__all__'
+
+    def retrieve(self, request, pk=None):
+        print(request.query_params)
+        queryset = ContributorBreakdown.objects.all().filter(committee_id=pk)
+        serializer = ContributorBreakdownSerializer(queryset, many=True)
+        return Response(serializer.data)
+        
 
 class ElectionCyclesViewSet(viewsets.ModelViewSet):
     serializer_class = ElectionCyclesSerializer
