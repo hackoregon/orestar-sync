@@ -117,7 +117,7 @@ class ContributorBreakdownViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filter_fields = '__all__'        
+    filter_fields = '__all__'
 
 class ElectionCyclesViewSet(viewsets.ModelViewSet):
     serializer_class = ElectionCyclesSerializer
@@ -154,6 +154,14 @@ class TotalContributionsRawInStateViewSet(viewsets.ModelViewSet):
 class TotalContributionsRawMonthRaceTypeViewSet(viewsets.ModelViewSet):
     serializer_class = TotalContributionsRawMonthRaceTypeSerializer
     queryset = TotalContributionsRawMonthRaceType.objects.all()
+    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    ordering_fields = '__all__'
+    search_fields = '__all__'
+    filter_fields = '__all__'
+
+class SpendingBreakdownViewSet(viewsets.ModelViewSet):
+    serializer_class = SpendingBreakdownSerializer
+    queryset = SpendingBreakdown.objects.all()
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'

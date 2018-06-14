@@ -242,3 +242,14 @@ class TotalContributionsRawMonthRaceType(models.Model):
     class Meta:
         managed = False
         db_table = 'total_contributions_raw_month_race_type'
+
+class SpendingBreakdown(models.Model):
+    sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    filer_name = models.CharField(max_length=255, blank=True, null=True)
+    committee_id = models.IntegerField(primary_key=True)
+    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+    spending_category = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'spending_breakdown'
