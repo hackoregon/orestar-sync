@@ -45,7 +45,7 @@ class TransactionsViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
 
 class TransactionDetailViewSet(viewsets.ModelViewSet):
     serializer_class = TransactionDetailSerializer
@@ -53,7 +53,7 @@ class TransactionDetailViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
 
 class StatementOfOrgViewSet(viewsets.ModelViewSet):
     serializer_class = StatementOfOrgSerializer
@@ -61,7 +61,7 @@ class StatementOfOrgViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
 
 class PayeeViewSet(viewsets.ModelViewSet):
     serializer_class = PayeeSerializer
@@ -69,7 +69,7 @@ class PayeeViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
 
 class ElectionActivityViewSet(viewsets.ModelViewSet):
     serializer_class = ElectionActivitySerializer
@@ -77,7 +77,7 @@ class ElectionActivityViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
 
 class DonorViewSet(viewsets.ModelViewSet):
     serializer_class = DonorSerializer
@@ -85,7 +85,7 @@ class DonorViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
 
 class CommitteesListViewSet(viewsets.ModelViewSet):
     serializer_class = CommitteesListSerializer
@@ -93,7 +93,7 @@ class CommitteesListViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
 
 class CommitteeHistoryViewSet(viewsets.ModelViewSet):
     serializer_class = CommitteeHistorySerializer
@@ -101,7 +101,7 @@ class CommitteeHistoryViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
 
 class BallotsViewSet(viewsets.ModelViewSet):
     serializer_class = BallotsSerializer
@@ -109,7 +109,7 @@ class BallotsViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
 
 class ContributorBreakdownViewSet(viewsets.ModelViewSet):
     serializer_class = ContributorBreakdownSerializer
@@ -117,14 +117,16 @@ class ContributorBreakdownViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
 
+"""
     def retrieve(self, request, pk=None):
+        print(self.kwargs)
         print(request.query_params)
         queryset = ContributorBreakdown.objects.all().filter(committee_id=pk)
         serializer = ContributorBreakdownSerializer(queryset, many=True)
         return Response(serializer.data)
-        
+"""        
 
 class ElectionCyclesViewSet(viewsets.ModelViewSet):
     serializer_class = ElectionCyclesSerializer
@@ -132,7 +134,7 @@ class ElectionCyclesViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
 
 class TotalContributionsMonthlyViewSet(viewsets.ModelViewSet):
     serializer_class = TotalContributionsMonthlySerializer
@@ -140,7 +142,7 @@ class TotalContributionsMonthlyViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
 
 class TotalContributionsYearlyViewSet(viewsets.ModelViewSet):
     serializer_class = TotalContributionsYearlySerializer
@@ -148,7 +150,7 @@ class TotalContributionsYearlyViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
 
 class TotalContributionsRawInStateViewSet(viewsets.ModelViewSet):
     serializer_class = TotalContributionsRawInStateSerializer
@@ -156,7 +158,7 @@ class TotalContributionsRawInStateViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
 
 class TotalContributionsRawMonthRaceTypeViewSet(viewsets.ModelViewSet):
     serializer_class = TotalContributionsRawMonthRaceTypeSerializer
@@ -164,4 +166,4 @@ class TotalContributionsRawMonthRaceTypeViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
-    filtering_fields = '__all__'
+    filter_fields = '__all__'
