@@ -46,7 +46,7 @@ class CommitteesList(models.Model):
     class Meta:
         managed = False
         db_table = 'committees_list'
-        
+
 
 class Donor(models.Model):
     donor_id = models.IntegerField(primary_key=True)
@@ -143,7 +143,7 @@ class TransactionDetails(models.Model):
     def total_amount(self):
         if self.amount.is_nan():
             return "not available"
-        return self.amount        
+        return self.amount
 
     @property
     def total_aggregate(self):
@@ -165,7 +165,7 @@ class Transactions(models.Model):
     contributor_payee = models.CharField(max_length=255, blank=True, null=True)
     transaction_subtype = models.CharField(max_length=255, blank=True, null=True)
     amount = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
-    
+
     @property
     def total_amount(self):
         if self.amount.is_nan():
@@ -198,7 +198,7 @@ class TotalContributionsMonthly(models.Model):
     class Meta:
         managed = False
         db_table = 'total_contributions_raw_month'
-        
+
 class TotalContributionsYearly(models.Model):
     id = models.IntegerField(primary_key=True)
     sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
@@ -215,7 +215,17 @@ class ElectionCycles(models.Model):
     type = models.CharField(max_length=255, blank=True, null=True)
     start_date = models.DateField()
     end_date = models.DateField()
-    
+
     class Meta:
         managed = False
         db_table = 'election_cycles'
+
+class TotalContributionsRawInState(models.Model):
+    committee_id = models.IntegerField(primary_key=True)
+    sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    filer_name = models.CharField(max_length=255, blank=True, null=True)
+    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'total_contributions_raw_in_state'
