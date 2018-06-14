@@ -101,3 +101,9 @@ class TotalContributionsRawInStateSerializer(serializers.ModelSerializer):
     class Meta:
         model = TotalContributionsRawInState
         fields = '__all__'
+
+class TotalContributionsRawMonthRaceTypeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TotalContributionsRawMonthRaceType
+        fields = '__all__'

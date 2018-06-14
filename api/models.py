@@ -228,3 +228,16 @@ class TotalContributionsRawInState(models.Model):
     class Meta:
         managed = False
         db_table = 'total_contributions_raw_in_state'
+
+class TotalContributionsRawMonthRaceType(models.Model):
+    id = models.IntegerField(primary_key=True)
+    sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    filer_name = models.CharField(max_length=255, blank=True, null=True)
+    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+    race_type = models.CharField(max_length=255, blank=True, null=True)
+    month = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    year = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'total_contributions_raw_month_race_type'
