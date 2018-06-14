@@ -9,7 +9,8 @@ from django.db import models
 
 
 class Ballots(models.Model):
-    name = models.CharField(primary_key=True, max_length=255)
+#    name = models.CharField(max_length=255, primary_key=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
     district = models.CharField(max_length=64, blank=True, null=True)
     party = models.CharField(max_length=4, blank=True, null=True)
     race = models.CharField(max_length=128, blank=True, null=True)
@@ -188,7 +189,7 @@ class TotalContributions(models.Model):
         db_table = 'total_contributions'
 
 class TotalContributionsMonthly(models.Model):
-    committee_id = models.IntegerField(primary_key=True)
+    id = models.IntegerField(primary_key=True)
     sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     filer_name = models.CharField(max_length=255, blank=True, null=True)
     election_cycle = models.CharField(max_length=255, blank=True, null=True)
@@ -199,7 +200,7 @@ class TotalContributionsMonthly(models.Model):
         db_table = 'total_contributions_raw_month'
         
 class TotalContributionsYearly(models.Model):
-    committee_id = models.IntegerField(primary_key=True)
+    id = models.IntegerField(primary_key=True)
     sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     filer_name = models.CharField(max_length=255, blank=True, null=True)
     election_cycle = models.CharField(max_length=255, blank=True, null=True)

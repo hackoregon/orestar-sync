@@ -107,6 +107,12 @@ class BallotsViewSet(viewsets.ModelViewSet):
     search_fields = '__all__'
     filtering_fields = '__all__'
 
+    def get(self, request, name=None):
+        names = Ballots.objects.all().filter(name=name)
+        serializer = BallotsSerializer(names)
+        return Response(serializer.data)
+
+
 class TotalContributionsViewSet(viewsets.ModelViewSet):
     serializer_class = TotalContributionsSerializer
     queryset = TotalContributions.objects.all()
