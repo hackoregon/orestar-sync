@@ -12,7 +12,9 @@ from api.models import (Transactions,
                         TotalContributionsMonthly,
                         TotalContributionsYearly,
                         TotalContributionsRawInState,
-                        TotalContributionsRawMonthRaceType,)
+                        TotalContributionsRawMonthRaceType,
+                        SpendingBreakdown,
+                        CommitteeContributors,)
 from api.serializers import (TransactionsSerializer,
                             TransactionDetailSerializer,
                             StatementOfOrgSerializer,
@@ -27,7 +29,9 @@ from api.serializers import (TransactionsSerializer,
                             TotalContributionsMonthlySerializer,
                             TotalContributionsYearlySerializer,
                             TotalContributionsRawInStateSerializer,
-                            TotalContributionsRawMonthRaceTypeSerializer,)
+                            TotalContributionsRawMonthRaceTypeSerializer,
+                            SpendingBreakdownSerializer,
+                            CommitteeContributorsSerializer,)
 
 from rest_framework.decorators import api_view, detail_route
 from rest_framework import generics
@@ -162,6 +166,14 @@ class TotalContributionsRawMonthRaceTypeViewSet(viewsets.ModelViewSet):
 class SpendingBreakdownViewSet(viewsets.ModelViewSet):
     serializer_class = SpendingBreakdownSerializer
     queryset = SpendingBreakdown.objects.all()
+    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    ordering_fields = '__all__'
+    search_fields = '__all__'
+    filter_fields = '__all__'
+
+class CommitteeContributorsViewSet(viewsets.ModelViewSet):
+    serializer_class = CommitteeContributorsSerializer
+    queryset = CommitteeContributors.objects.all()
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'

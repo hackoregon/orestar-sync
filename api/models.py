@@ -9,7 +9,6 @@ from django.db import models
 
 
 class Ballots(models.Model):
-#    name = models.CharField(max_length=255, primary_key=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     district = models.CharField(max_length=64, blank=True, null=True)
     party = models.CharField(max_length=4, blank=True, null=True)
@@ -253,3 +252,15 @@ class SpendingBreakdown(models.Model):
     class Meta:
         managed = False
         db_table = 'spending_breakdown'
+
+
+class CommitteeContributors(models.Model):
+    sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    contributor_payee = models.CharField(max_length=255, blank=True, null=True)
+    filer_name = models.CharField(max_length=255, blank=True, null=True)
+    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+    committee_id = models.IntegerField()    
+
+    class Meta:
+        managed = False
+        db_table = 'committee_contributions'
