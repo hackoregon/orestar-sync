@@ -154,3 +154,11 @@ class TotalContributionsRawInStateViewSet(viewsets.ModelViewSet):
     ordering_fields = '__all__'
     search_fields = '__all__'
     filtering_fields = '__all__'
+
+class TotalContributionsRawMonthRaceTypeViewSet(viewsets.ModelViewSet):
+    serializer_class = TotalContributionsRawMonthRaceTypeSerializer
+    queryset = TotalContributionsRawMonthRaceType.objects.all()
+    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    ordering_fields = '__all__'
+    search_fields = '__all__'
+    filtering_fields = '__all__'
