@@ -147,6 +147,14 @@ class TotalContributionsYearlyViewSet(viewsets.ModelViewSet):
     search_fields = '__all__'
     filter_fields = '__all__'
 
+class TotalContributionsRawViewSet(viewsets.ModelViewSet):
+    serializer_class = TotalContributionsRawSerializer
+    queryset = TotalContributionsRaw.objects.all()
+    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    ordering_fields = '__all__'
+    search_fields = '__all__'
+    filter_fields = '__all__'
+
 class TotalContributionsRawInStateViewSet(viewsets.ModelViewSet):
     serializer_class = TotalContributionsRawInStateSerializer
     queryset = TotalContributionsRawInState.objects.all()

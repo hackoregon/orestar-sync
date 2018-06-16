@@ -222,6 +222,15 @@ class ElectionCycles(models.Model):
         managed = False
         db_table = 'election_cycles'
 
+class TotalContributionsRaw(models.Model):
+    sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    filer_name = models.CharField(max_length=255, blank=True, null=True)
+    id = models.IntegerField(primary_key=True)
+    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'total_contributions_raw'
 
 class TotalContributionsRawInState(models.Model):
     committee_id = models.IntegerField(primary_key=True)
