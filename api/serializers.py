@@ -3,7 +3,8 @@ from api.models import (Transactions, TransactionDetails, StatementOfOrg,
                        Payee, ElectionActivity, Donor, CommitteesList,
                        CommitteeHistory, Ballots, ContributorBreakdown,
                        ElectionCycles,TotalContributionsMonthly,
-                       TotalContributionsYearly,TotalContributionsRawInState,
+                       TotalContributionsYearly,TotalContributionsRaw,
+                       TotalContributionsRawInState,
                        TotalContributionsRawMonthRaceType,
                        SpendingBreakdown, CommitteeContributors,)
 
