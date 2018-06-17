@@ -9,7 +9,6 @@ from django.db import models
 
 
 class Ballots(models.Model):
-#    name = models.CharField(max_length=255, primary_key=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     district = models.CharField(max_length=64, blank=True, null=True)
     party = models.CharField(max_length=4, blank=True, null=True)
@@ -46,7 +45,7 @@ class CommitteesList(models.Model):
     class Meta:
         managed = False
         db_table = 'committees_list'
-        
+
 
 class Donor(models.Model):
     donor_id = models.IntegerField(primary_key=True)
@@ -143,7 +142,7 @@ class TransactionDetails(models.Model):
     def total_amount(self):
         if self.amount.is_nan():
             return "not available"
-        return self.amount        
+        return self.amount
 
     @property
     def total_aggregate(self):
@@ -165,7 +164,7 @@ class Transactions(models.Model):
     contributor_payee = models.CharField(max_length=255, blank=True, null=True)
     transaction_subtype = models.CharField(max_length=255, blank=True, null=True)
     amount = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
-    
+
     @property
     def total_amount(self):
         if self.amount.is_nan():
@@ -177,19 +176,20 @@ class Transactions(models.Model):
         db_table = 'transactions'
 
 
-class TotalContributions(models.Model):
+class ContributorBreakdown(models.Model):
     committee_id = models.IntegerField(primary_key=True)
     sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     filer_name = models.CharField(max_length=255, blank=True, null=True)
     donor_category = models.CharField(max_length=255, blank=True, null=True)
-    ratio = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
-    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+    ratio = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+#    election_cycle = models.CharField(max_length=255, blank=True, null=True)
     class Meta:
         managed = False
-        db_table = 'total_contributions'
+        db_table = 'contributor_breakdown'
+
 
 class TotalContributionsMonthly(models.Model):
-    id = models.IntegerField(primary_key=True)
+    committee_id = models.IntegerField(primary_key=True)
     sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     filer_name = models.CharField(max_length=255, blank=True, null=True)
     election_cycle = models.CharField(max_length=255, blank=True, null=True)
@@ -198,9 +198,10 @@ class TotalContributionsMonthly(models.Model):
     class Meta:
         managed = False
         db_table = 'total_contributions_raw_month'
-        
+
+
 class TotalContributionsYearly(models.Model):
-    id = models.IntegerField(primary_key=True)
+    committee_id = models.IntegerField(primary_key=True)
     sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     filer_name = models.CharField(max_length=255, blank=True, null=True)
     election_cycle = models.CharField(max_length=255, blank=True, null=True)
@@ -210,12 +211,69 @@ class TotalContributionsYearly(models.Model):
         managed = False
         db_table = 'total_contributions_raw_year'
 
+
 class ElectionCycles(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     type = models.CharField(max_length=255, blank=True, null=True)
     start_date = models.DateField()
     end_date = models.DateField()
-    
+
     class Meta:
         managed = False
         db_table = 'election_cycles'
+
+class TotalContributionsRaw(models.Model):
+    sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    filer_name = models.CharField(max_length=255, blank=True, null=True)
+    id = models.IntegerField(primary_key=True)
+    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'total_contributions_raw'
+
+class TotalContributionsRawInState(models.Model):
+    committee_id = models.IntegerField(primary_key=True)
+    sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    filer_name = models.CharField(max_length=255, blank=True, null=True)
+    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'total_contributions_raw_in_state'
+
+
+class TotalContributionsRawMonthRaceType(models.Model):
+    sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+    race_type = models.CharField(max_length=255, blank=True, null=True)
+    month = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    year = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'total_contributions_raw_month_race_type'
+
+
+class SpendingBreakdown(models.Model):
+    sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    filer_name = models.CharField(max_length=255, blank=True, null=True)
+    committee_id = models.IntegerField(primary_key=True)
+    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+    spending_category = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'spending_breakdown'
+
+
+class CommitteeContributors(models.Model):
+    sum = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    contributor_payee = models.CharField(max_length=255, blank=True, null=True)
+    filer_name = models.CharField(max_length=255, blank=True, null=True)
+    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+    committee_id = models.IntegerField(primary_key=True)
+
+    class Meta:
+        managed = False
+        db_table = 'committee_contributions'
