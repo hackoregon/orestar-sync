@@ -14,7 +14,9 @@ from typing import Dict, Iterable
 import numpy as np
 import itertools
 
-ELECTION_DB_HOST = '54.202.102.40'
+ELECTION_DB_HOST = 'db_development'
+#ELECTION_DB_HOST = '127.0.0.1'
+#ELECTION_DB_HOST = '54.202.102.40'
 ELECTION_DB_NAME = 'local-elections-finance'
 
 class Memoize():
@@ -131,10 +133,14 @@ def query_db(table: str,
 
     if user is None or password is None:
         login_info = get_db_login_info()
-        user = login_info['username']
-        password = login_info['password']
+#        user = login_info['username']
+#        password = login_info['password']
+        user = 'postgres'
 
-    conn = psycopg2.connect(host=host, dbname=dbname, user=user, password=password)
+    conn = psycopg2.connect(host=host, 
+                            dbname=dbname, 
+                            user=user,) 
+#                            password=password)
     query = 'SELECT {0:s} FROM {1:s}'.format(select_stmt, table)
     if len(where_stmt) > 0:
         query += ' WHERE {0:s}'.format(where_stmt)

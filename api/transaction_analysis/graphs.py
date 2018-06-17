@@ -31,7 +31,7 @@ class Graph(object):
 
         # Relabel Nodes with Ints
         node_names = set(sources + sinks)
-        print(node_names)
+#        print(node_names)
         self.__name_lookup = {node_id: node_name for node_id, node_name in enumerate(node_names)}
         self.__id_lookup = {node_name: node_id for node_id, node_name in self.__name_lookup.items()}
         edges = {(self.__id_lookup[epoints[0]], self.__id_lookup[epoints[1]]): val for epoints, val in edges.items()}
@@ -209,7 +209,8 @@ class Graph(object):
 
         if filename is None:
             io = StringIO()
-            json.dump(load_json, io, indent=4)
+#            json.dump(load_json, io, indent=4)
+            json.dump(load_json, io)
             return io.getvalue()
         else:
             with open(filename, 'w') as fout:

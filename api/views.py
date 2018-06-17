@@ -48,6 +48,7 @@ from rest_framework.reverse import reverse
 from rest_framework import renderers
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.exceptions import APIException
 from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 
 from api.transaction_analysis.funding_similarity import SimilarityGraph
@@ -208,25 +209,28 @@ class ContributorGraphViewSet(viewsets.ModelViewSet):
 @api_view(['GET'])
 def graph(request):
     """
-    start --- start date in format YYYY-m-d
-    end --- end date in format YYYY-m-d
-    name --- committee to graph
+    make a graph of donor contributions
+
+    example --- /local-elections/contributorgraph?start=2002-12-31&end=2003-12-31&name=Barnie+Rubble
+    `start` --- start date in format YYYY-m-d
+    `end` --- end date in format YYYY-m-d
+    `name` --- url encoded campaign to check
     """
     start = request.query_params.get("start")
     end = request.query_params.get("end")
     name = request.query_params.get("name")
 
     if not start or not end or not name:
-        raise Exception("must have start, end, and name")
+        raise APIException("query parameters must include `start`, `end`, and `name`")
 
-    # need to pass datetime to graph
     try:
         start = datetime.strptime(start, "%Y-%m-%d")
         end = datetime.strptime(end, "%Y-%m-%d")
-    except Exception:
-        raise Exception("date format is YYYY-m-d")
+    except ValueError:
+        raise APIException("date format is YYYY-m-d")
 
     graph = SimilarityGraph(start_date=start,
                         end_date=end)
     graph = graph.look_up(name)
+    print(graph['graph_json'])
     return Response(graph)
