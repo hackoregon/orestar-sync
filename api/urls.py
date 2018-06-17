@@ -24,7 +24,7 @@ router.register(r'totalcontributionsrawinstate', views.TotalContributionsRawInSt
 router.register(r'totalcontributionsrawmonthracetype', views.TotalContributionsRawMonthRaceTypeViewSet)
 router.register(r'spendingbreakdown', views.SpendingBreakdownViewSet)
 router.register(r'committeecontributors', views.CommitteeContributorsViewSet)
-#router.register(r'contributorgraph', views.ContributorGraphViewSet)
+router.register(r'contributorgraph', views.ContributorGraphViewSet)
 
 schema_view = get_swagger_view(title='Hack Oregon 2018 Local Elections APIs')
 
