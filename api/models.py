@@ -278,3 +278,9 @@ class CommitteeContributors(models.Model):
     class Meta:
         managed = False
         db_table = 'committee_contributions'
+
+
+class ContributorGraph(models.Model):
+
+    class Meta:
+        managed = False
