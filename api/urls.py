@@ -21,6 +21,7 @@ router.register(r'totalcontributionsmonthly', views.TotalContributionsMonthlyVie
 router.register(r'totalcontributionsyearly', views.TotalContributionsYearlyViewSet)
 router.register(r'totalcontributionsraw', views.TotalContributionsRawViewSet)
 router.register(r'totalcontributionsrawinstate', views.TotalContributionsRawInStateViewSet)
+router.register(r'totalcontributionsrawmonthtotal', views.TotalContributionsRawMonthTotalViewSet)
 router.register(r'totalcontributionsrawmonthracetype', views.TotalContributionsRawMonthRaceTypeViewSet)
 router.register(r'spendingbreakdown', views.SpendingBreakdownViewSet)
 router.register(r'committeecontributors', views.CommitteeContributorsViewSet)

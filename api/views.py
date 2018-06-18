@@ -16,6 +16,7 @@ from api.models import (Transactions,
                         TotalContributionsYearly,
                         TotalContributionsRaw,
                         TotalContributionsRawInState,
+                        TotalContributionsRawMonthTotal,
                         TotalContributionsRawMonthRaceType,
                         SpendingBreakdown,
                         CommitteeContributors,
@@ -35,6 +36,7 @@ from api.serializers import (TransactionsSerializer,
                             TotalContributionsYearlySerializer,
                             TotalContributionsRawSerializer,
                             TotalContributionsRawInStateSerializer,
+                            TotalContributionsRawMonthTotalSerializer,
                             TotalContributionsRawMonthRaceTypeSerializer,
                             SpendingBreakdownSerializer,
                             CommitteeContributorsSerializer,
@@ -173,6 +175,14 @@ class TotalContributionsRawInStateViewSet(viewsets.ModelViewSet):
     search_fields = '__all__'
     filter_fields = '__all__'
 
+class TotalContributionsRawMonthTotalViewSet(viewsets.ModelViewSet):
+    serializer_class = TotalContributionsRawMonthTotalSerializer
+    queryset = TotalContributionsRawMonthTotalobjects.all()
+    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    ordering_fields = '__all__'
+    search_fields = '__all__'
+    filter_fields = '__all__'
+
 class TotalContributionsRawMonthRaceTypeViewSet(viewsets.ModelViewSet):
     serializer_class = TotalContributionsRawMonthRaceTypeSerializer
     queryset = TotalContributionsRawMonthRaceType.objects.all()
@@ -200,7 +210,7 @@ class CommitteeContributorsViewSet(viewsets.ModelViewSet):
 class ContributorGraphViewSet(viewsets.ModelViewSet):
     serializer_class = ContributorGraphSerializer
     queryset = ContributorGraph.objects.all()
-    
+
     def post(self, request):
         print(request)
         print(request.data)

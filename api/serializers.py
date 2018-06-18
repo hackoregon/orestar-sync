@@ -5,6 +5,7 @@ from api.models import (Transactions, TransactionDetails, StatementOfOrg,
                        ElectionCycles,TotalContributionsMonthly,
                        TotalContributionsYearly,TotalContributionsRaw,
                        TotalContributionsRawInState,
+                       TotalContributionsRawMonthTotal,
                        TotalContributionsRawMonthRaceType,
                        SpendingBreakdown, CommitteeContributors,
                        ContributorGraph,)
@@ -112,6 +113,12 @@ class TotalContributionsRawInStateSerializer(serializers.ModelSerializer):
         model = TotalContributionsRawInState
         fields = '__all__'
 
+class TotalContributionsRawMonthTotalSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TotalContributionsRawMonthTotal
+        fields = '__all__'
+
 class TotalContributionsRawMonthRaceTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -131,7 +138,7 @@ class CommitteeContributorsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ContributorGraphSerializer(serializers.ModelSerializer):
-    
+
     class Meta:
         model = ContributorGraph
         fields = '__all__'
