@@ -177,7 +177,7 @@ class TotalContributionsRawInStateViewSet(viewsets.ModelViewSet):
 
 class TotalContributionsRawMonthTotalViewSet(viewsets.ModelViewSet):
     serializer_class = TotalContributionsRawMonthTotalSerializer
-    queryset = TotalContributionsRawMonthTotalobjects.all()
+    queryset = TotalContributionsRawMonthTotal.objects.all()
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
