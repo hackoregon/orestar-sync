@@ -51,8 +51,8 @@ class SimilarityGraph():
         trans = trans[trans['is_valid']]
 
         ## AGGREGATE TRANSACIONS
-        agg_contributions = trans.groupby(['committee_id', 'contributor_payee']).sum().reset_index() \
-            .groupby(['committee_id']).apply(map_to_dict).reset_index()
+        agg_contributions = trans.groupby(['committee_id', 'contributor_payee']).sum().reset_index().groupby(['committee_id']).apply(map_to_dict).reset_index()
+
         agg_contributions.columns = ['committee_id', 'donors']
 
         # Remove committes with less than given min donations
