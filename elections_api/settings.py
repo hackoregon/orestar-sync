@@ -125,7 +125,7 @@ if DEBUG == False:
             'PORT': os.environ.get('POSTGRES_PORT'),
             'CONN_MAX_AGE': 0,
             'OPTIONS': {
-                'MAX_CONNS': 20,
+                'MAX_CONNS': 1,
                 'options': '-c search_path=public,django',
             },
         }
