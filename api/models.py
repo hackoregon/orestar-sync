@@ -294,3 +294,15 @@ class ContributorGraph(models.Model):
 
     class Meta:
         managed = False
+
+class VoterAcquisitionCost(models.Model):
+    voter_acquisition_cost = models.DecimalField(max_digits=5, decimal_places=4, blank=True, null=True)
+    year = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    votes = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    election_cycle = models.CharField(max_length=100, blank=True, null=True)
+    type = models.CharField(max_length=1, blank=True, null=True)
+    election_cycle = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'voter_acquisition_cost'
