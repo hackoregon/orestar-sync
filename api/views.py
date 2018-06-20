@@ -21,7 +21,8 @@ from api.models import (Transactions,
                         SpendingBreakdown,
                         CommitteeContributors,
                         ContributorGraph,
-                        VoterAcquisitionCost,)
+                        VoterAcquisitionCost,
+                        CommitteeElectionCycle,)
 from api.serializers import (TransactionsSerializer,
                             TransactionDetailSerializer,
                             StatementOfOrgSerializer,
@@ -42,7 +43,8 @@ from api.serializers import (TransactionsSerializer,
                             SpendingBreakdownSerializer,
                             CommitteeContributorsSerializer,
                             ContributorGraphSerializer,
-                            VoterAcquisitionCostSerializer,)
+                            VoterAcquisitionCostSerializer,
+                            CommitteeElectionCycleSerializer,)
 
 from rest_framework.decorators import api_view, detail_route
 from rest_framework import generics
@@ -217,6 +219,13 @@ class VoterAcquisitionCostViewSet(viewsets.ModelViewSet):
     search_fields = '__all__'
     filter_fields = '__all__'
 
+class CommitteeElectionCycleViewSet(viewsets.ModelViewSet):
+    serializer_class = CommitteeElectionCycleSerializer
+    queryset = VoterAcquisitionCost.objects.all()
+    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    ordering_fields = '__all__'
+    search_fields = '__all__'
+    filter_fields = '__all__'
 
 @api_view(['GET'])
 def graph(request):
@@ -244,5 +253,4 @@ def graph(request):
     graph = SimilarityGraph(start_date=start,
                         end_date=end)
     graph = graph.look_up(name)
-
     return Response(graph)

@@ -148,3 +148,9 @@ class VoterAcquisitionCostSerializer(serializers.ModelSerializer):
     class Meta:
         model = VoterAcquisitionCost
         fields = '__all__'
+
+class CommitteeElectionCycleSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CommitteeElectionCycle
+        fields = '__all__'

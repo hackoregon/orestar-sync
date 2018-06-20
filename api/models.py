@@ -306,3 +306,12 @@ class VoterAcquisitionCost(models.Model):
     class Meta:
         managed = False
         db_table = 'voter_acquisition_cost'
+
+class CommitteeElectionCycle(models.Model):
+    committee_name = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    committee_id = models.IntegerField(primary_key=True)
+
+    class Meta:
+        managed = False
+        db_table = 'committee_election_cycle'
