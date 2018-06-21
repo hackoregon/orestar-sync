@@ -8,7 +8,7 @@ from api.models import (Transactions, TransactionDetails, StatementOfOrg,
                        TotalContributionsRawMonthTotal,
                        TotalContributionsRawMonthRaceType,
                        SpendingBreakdown, CommitteeContributors,
-                       ContributorGraph,VoterAcquisitionCost,)
+                       ContributorGraph,VoterAcquisitionCost,CommitteeElectionCycle)
 
 class TransactionsSerializer(serializers.ModelSerializer):
 
