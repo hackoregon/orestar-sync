@@ -253,4 +253,5 @@ def graph(request):
     graph = SimilarityGraph(start_date=start,
                         end_date=end)
     graph = graph.look_up(name)
+    
     return Response(graph)
