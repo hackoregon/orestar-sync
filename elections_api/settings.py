@@ -113,23 +113,24 @@ DATABASES = {
     }
 }
 
-if DEBUG == False:
+# 2018-06-20: commenting out this block in pursuit of https://github.com/hackoregon/civic-devops/issues/177
+# if DEBUG == False:
 
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django_db_geventpool.backends.postgresql_psycopg2',
-            'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-            'NAME': os.environ.get('POSTGRES_NAME'),
-            'USER': os.environ.get('POSTGRES_USER'),
-            'HOST': os.environ.get('POSTGRES_HOST'),
-            'PORT': os.environ.get('POSTGRES_PORT'),
-            'CONN_MAX_AGE': 0,
-            'OPTIONS': {
-                'MAX_CONNS': 1,
-                'options': '-c search_path=public,django',
-            },
-        }
-    }
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django_db_geventpool.backends.postgresql_psycopg2',
+#             'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+#             'NAME': os.environ.get('POSTGRES_NAME'),
+#             'USER': os.environ.get('POSTGRES_USER'),
+#             'HOST': os.environ.get('POSTGRES_HOST'),
+#             'PORT': os.environ.get('POSTGRES_PORT'),
+#             'CONN_MAX_AGE': 0,
+#             'OPTIONS': {
+#                 'MAX_CONNS': 20,
+#                 'options': '-c search_path=public,django',
+#             },
+#         }
+#     }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
