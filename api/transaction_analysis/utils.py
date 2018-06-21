@@ -2,7 +2,6 @@
 Useful functions for transaction analysis
 
 '''
-
 import datetime
 import psycopg2
 import json
@@ -13,11 +12,11 @@ import functools
 from typing import Dict, Iterable
 import numpy as np
 import itertools
+from elections_api.settings import DATABASES
 
-ELECTION_DB_HOST = 'db_development'
-#ELECTION_DB_HOST = '127.0.0.1'
-#ELECTION_DB_HOST = '54.202.102.40'
-ELECTION_DB_NAME = 'local-elections-finance'
+ELECTION_DB_HOST = DATABASES['default']['HOST']
+ELECTION_DB_NAME = DATABASES['default']['NAME']
+
 
 class Memoize():
     """ A wrapper for caching function results """
@@ -133,14 +132,14 @@ def query_db(table: str,
 
     if user is None or password is None:
         login_info = get_db_login_info()
-#        user = login_info['username']
-#        password = login_info['password']
-        user = 'postgres'
+        user = login_info['username']
+        password = login_info['password']
 
-    conn = psycopg2.connect(host=host, 
-                            dbname=dbname, 
-                            user=user,) 
-#                            password=password)
+    conn = psycopg2.connect(host=DATABASES['default']['HOST'], 
+                            dbname=DATABASES['default']['NAME'], 
+                            user=DATABASES['default']['USER'], 
+                            port=DATABASES['default']['PORT'],
+                            password=DATABASES['default']['PASSWORD'])
     query = 'SELECT {0:s} FROM {1:s}'.format(select_stmt, table)
     if len(where_stmt) > 0:
         query += ' WHERE {0:s}'.format(where_stmt)

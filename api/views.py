@@ -20,7 +20,9 @@ from api.models import (Transactions,
                         TotalContributionsRawMonthTotal,
                         SpendingBreakdown,
                         CommitteeContributors,
-                        ContributorGraph,)
+                        ContributorGraph,
+                        VoterAcquisitionCost,
+                        CommitteeElectionCycle,)
 from api.serializers import (TransactionsSerializer,
                             TransactionDetailSerializer,
                             StatementOfOrgSerializer,
@@ -40,7 +42,9 @@ from api.serializers import (TransactionsSerializer,
                             TotalContributionsRawMonthTotalSerializer,
                             SpendingBreakdownSerializer,
                             CommitteeContributorsSerializer,
-                            ContributorGraphSerializer,)
+                            ContributorGraphSerializer,
+                            VoterAcquisitionCostSerializer,
+                            CommitteeElectionCycleSerializer,)
 
 from rest_framework.decorators import api_view, detail_route
 from rest_framework import generics
@@ -207,6 +211,21 @@ class TotalContributionsRawMonthTotalViewSet(viewsets.ModelViewSet):
     search_fields = '__all__'
     filter_fields = '__all__'
 
+class VoterAcquisitionCostViewSet(viewsets.ModelViewSet):
+    serializer_class = VoterAcquisitionCostSerializer
+    queryset = VoterAcquisitionCost.objects.all()
+    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    ordering_fields = '__all__'
+    search_fields = '__all__'
+    filter_fields = '__all__'
+
+class CommitteeElectionCycleViewSet(viewsets.ModelViewSet):
+    serializer_class = CommitteeElectionCycleSerializer
+    queryset = VoterAcquisitionCost.objects.all()
+    filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
+    ordering_fields = '__all__'
+    search_fields = '__all__'
+    filter_fields = '__all__'
 
 @api_view(['GET'])
 def graph(request):

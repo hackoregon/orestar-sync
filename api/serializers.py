@@ -8,7 +8,7 @@ from api.models import (Transactions, TransactionDetails, StatementOfOrg,
                        TotalContributionsRawMonthTotal,
                        TotalContributionsRawMonthRaceType,
                        SpendingBreakdown, CommitteeContributors,
-                       ContributorGraph,)
+                       ContributorGraph,VoterAcquisitionCost,)
 
 class TransactionsSerializer(serializers.ModelSerializer):
 
@@ -141,4 +141,16 @@ class ContributorGraphSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ContributorGraph
+        fields = '__all__'
+
+class VoterAcquisitionCostSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = VoterAcquisitionCost
+        fields = '__all__'
+
+class CommitteeElectionCycleSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CommitteeElectionCycle
         fields = '__all__'
