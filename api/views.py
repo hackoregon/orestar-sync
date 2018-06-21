@@ -221,7 +221,7 @@ class VoterAcquisitionCostViewSet(viewsets.ModelViewSet):
 
 class CommitteeElectionCycleViewSet(viewsets.ModelViewSet):
     serializer_class = CommitteeElectionCycleSerializer
-    queryset = VoterAcquisitionCost.objects.all()
+    queryset = CommitteeElectionCycle.objects.all()
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     ordering_fields = '__all__'
     search_fields = '__all__'
@@ -253,5 +253,5 @@ def graph(request):
     graph = SimilarityGraph(start_date=start,
                         end_date=end)
     graph = graph.look_up(name)
-    
+
     return Response(graph)
