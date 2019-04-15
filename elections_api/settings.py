@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') == "True"
+DEBUG = bool(os.environ.get('DEBUG', False))
 
 ALLOWED_HOSTS = ['*']
 
@@ -106,26 +106,31 @@ DATABASES = {
         'NAME': os.environ.get('POSTGRES_NAME'),
         'USER': os.environ.get('POSTGRES_USER'),
         'HOST': os.environ.get('POSTGRES_HOST'),
-        'PORT': os.environ.get('POSTGRES_PORT')
+        'PORT': os.environ.get('POSTGRES_PORT'),
+        'OPTIONS': {
+            'options': '-c search_path=public,django',
+        },
     }
 }
 
-if DEBUG == False:
+# 2018-06-20: commenting out this block in pursuit of https://github.com/hackoregon/civic-devops/issues/177
+# if DEBUG == False:
 
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django_db_geventpool.backends.postgresql_psycopg2',
-            'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-            'NAME': os.environ.get('POSTGRES_NAME'),
-            'USER': os.environ.get('POSTGRES_USER'),
-            'HOST': os.environ.get('POSTGRES_HOST'),
-            'PORT': os.environ.get('POSTGRES_PORT'),
-            'CONN_MAX_AGE': 0,
-            'OPTIONS': {
-                'MAX_CONNS': 20
-            }
-        }
-    }
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django_db_geventpool.backends.postgresql_psycopg2',
+#             'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+#             'NAME': os.environ.get('POSTGRES_NAME'),
+#             'USER': os.environ.get('POSTGRES_USER'),
+#             'HOST': os.environ.get('POSTGRES_HOST'),
+#             'PORT': os.environ.get('POSTGRES_PORT'),
+#             'CONN_MAX_AGE': 0,
+#             'OPTIONS': {
+#                 'MAX_CONNS': 20,
+#                 'options': '-c search_path=public,django',
+#             },
+#         }
+#     }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -167,7 +172,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATIC_URL = '/static/'
+STATIC_URL = '/local-elections/static/'
 
 #custom test runner to toggle between Managed=True and Managed=False for models handling test db
 #TEST_RUNNER = 'api.utils.UnManagedModelTestRunner'
