@@ -3,8 +3,8 @@ Funding similarity module
 '''
 
 from functools import reduce
-from api.transaction_analysis.utils import fetch_transactions, fetch_statement_of_org
-from api.transaction_analysis.graphs import Graph
+from .utils import fetch_transactions, fetch_statement_of_org
+from .graphs import Graph
 import numpy as np
 import datetime
 import itertools

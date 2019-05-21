@@ -1,7 +1,7 @@
 from datetime import datetime
 import json
 
-from api.models import (Transactions,
+from .models import (Transactions,
                         TransactionDetails,
                         StatementOfOrg,
                         Payee,
@@ -23,7 +23,7 @@ from api.models import (Transactions,
                         ContributorGraph,
                         VoterAcquisitionCost,
                         CommitteeElectionCycle,)
-from api.serializers import (TransactionsSerializer,
+from .serializers import (TransactionsSerializer,
                             TransactionDetailSerializer,
                             StatementOfOrgSerializer,
                             PayeeSerializer,
@@ -57,7 +57,7 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.exceptions import APIException
 from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 
-from api.transaction_analysis.funding_similarity import SimilarityGraph
+from .transaction_analysis.funding_similarity import SimilarityGraph
 
 class TransactionsViewSet(viewsets.ModelViewSet):
     serializer_class = TransactionsSerializer

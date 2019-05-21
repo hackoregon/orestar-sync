@@ -8,8 +8,9 @@ services:
     ports:
       - 5439:5432
     environment:
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=local_elections
+      - POSTGRES_PASSWORD
+      - DATABASE_OWNER
+      - TEAM_PASSWORD
   api_development:
     build:
       context: .
@@ -23,11 +24,12 @@ services:
     depends_on:
       - db_development
     environment:
-      - PROJECT_NAME=localelections
+      - PROJECT_NAME
       - DEBUG=True
-      - POSTGRES_USER=postgres
-      - POSTGRES_NAME=local_elections
-      - POSTGRES_HOST=db_development
-      - POSTGRES_PORT=5432
-      - POSTGRES_PASSWORD=password
-      - DJANGO_SECRET_KEY=R4ND0M_STR1NG
+      - POSTGRES_USER
+      - POSTGRES_NAME
+      - POSTGRES_HOST
+      - POSTGRES_PORT
+      - POSTGRES_PASSWORD
+      - DATABASE_OWNER
+      - DJANGO_SECRET_KEY

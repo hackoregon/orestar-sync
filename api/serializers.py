@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import (Transactions, TransactionDetails, StatementOfOrg,
+from .models import (Transactions, TransactionDetails, StatementOfOrg,
                        Payee, ElectionActivity, Donor, CommitteesList,
                        CommitteeHistory, Ballots, ContributorBreakdown,
                        ElectionCycles,TotalContributionsMonthly,
