@@ -31,5 +31,4 @@ services:
       - POSTGRES_HOST
       - POSTGRES_PORT
       - POSTGRES_PASSWORD
-      - DATABASE_OWNER
       - DJANGO_SECRET_KEY
