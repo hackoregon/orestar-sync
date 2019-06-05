@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['*']
 if DEBUG == True:
 
     INSTALLED_APPS = [
-         'test_without_migrations',
+        'test_without_migrations',
         'django.contrib.admin',
         'django.contrib.auth',
         'django.contrib.contenttypes',
@@ -49,7 +49,7 @@ if DEBUG == True:
 
 else:
     INSTALLED_APPS = [
-         'test_without_migrations',
+        'test_without_migrations',
         'django.contrib.admin',
         'django.contrib.auth',
         'django.contrib.contenttypes',

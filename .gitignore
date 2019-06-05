@@ -111,3 +111,5 @@ env.production
 ./api/transaction_analysis/elections_login.json
 
 temp_models/
+
+*.csv
