@@ -37,20 +37,19 @@ services:
       - POSTGRES_PASSWORD
       - DJANGO_SECRET_KEY
 
-#Selenium Configuration
-  # selenium-hub:
-  #   image: selenium/hub:3.141.59-oxygen
-  #   # container_name: selenium-hub
-  #   ports:
-  #     - "4444:4444"
-      
+#Selenium Hub
+  hub:
+    image: selenium/hub:3
+    ports:
+      - 4444:4444
+    
 #Selenium Chrome Node
   chrome:
     image: selenium/node-chrome:3.141.59-oxygen
     volumes:
       - /dev/shm:/dev/shm
-    # depends_on:
-    #   - selenium-hub
+    depends_on:
+      - hub
     environment:
-      # - HUB_HOST=selenium-hub
+      - HUB_HOST=hub
       - HUB_PORT=4444

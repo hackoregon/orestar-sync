@@ -7,18 +7,16 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from django.core.management.base import BaseCommand
 import csv
+import time
 
-
-# display = 
 class Command(BaseCommand):
     help = 'Selenium Based Scrapper for OreStar'
 
     def handle(self, *args, **kwargs):
-        
         #Open chrome and navigate to webpage
         url = 'https://secure.sos.state.or.us/orestar/gotoPublicTransactionSearch.do'
-        print('Url Collected')
-        
+        print('url collected')
+    
         #Pass arguments to the Chrome Driver
         options = Options()
         prefs = {"download.default_directory" : "./code/downloads"}
@@ -31,7 +29,7 @@ class Command(BaseCommand):
         options.add_argument('--no-sandbox')
         options.set_headless(headless=True)
         options.binary_location = "/usr/bin/google-chrome-stable"
-        print('options aggrgated')
+        print('options collected')
 
         #Initiate Driver
         driver = webdriver.Chrome('/code/chromedriver', chrome_options= options)
@@ -42,9 +40,13 @@ class Command(BaseCommand):
         #Go to Orestar Transaction Search page
         driver.get(url)
 
-        #print website source code
-        # print(driver.page_source)
-
+        #Wait until page is loaded
+        try:
+            myElem = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.ID, 'header2')))
+            print("submitting search query")
+        except TimeoutException:
+            print("loading took too much time!")
+        
         #Grab form and button elements
         start = driver.find_element_by_id('cneSearchTranStartDate')
         end = driver.find_element_by_id('cneSearchTranEndDate')
@@ -54,68 +56,51 @@ class Command(BaseCommand):
         start.clear()
         start.send_keys('01/01/2016')
         end.clear()
-        end.send_keys('02/01/2016')
-
-        #Wait until page is loaded
-        try:
-            myElem = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.ID, 'header2')))
-            print("Page is ready!")
-        except TimeoutException:
-            print("Loading took too much time!")
+        end.send_keys('01/02/2016')
             
         #click search button
         search_button.click()
-        print('Searching specified dates')
-
-        table = driver.find_element_by_xpath('//*[@id="content"]/div/form/table[4]/tbody')
-        headings = driver.find_elements_by_xpath('//*[@id="content"]/div/form/table[4]/tbody/tr[1]/td')
-        even_rows = driver.find_elements_by_class_name('evenRow')
-        odd_rows = driver.find_elements_by_class_name('oddRow')
+        print('searching specified dates')
+        
+        table = driver.find_element_by_tag_name('tr')
 
         transactions = []
 
-        for h in table.find_elements_by_xpath('.//tr'):
-            transactions.append([td.text for td in h.find_elements_by_xpath('.//td')])
-        myFile = open('csv-write-data.csv', 'w')
-        with myFile:
+
+        #while the number of rows is greater than 1 find and click the next button to repeat the following steps
+        while len(driver.find_elements_by_class_name('evenRow')) > 1:
+            table = driver.find_element_by_tag_name('tr')
+            even_rows = table.find_elements_by_class_name('evenRow')
+            odd_rows = table.find_elements_by_class_name('oddRow')
+            rows = even_rows + odd_rows
+
+            #insert items into a list
+            for items in rows:
+                individual = []
+
+                #insert individual transactions into a list
+                for cell in items.find_elements_by_xpath('.//td'):
+                    individual.append(cell.text)
+                transactions.append(individual)
+
+            try:
+                wait_for_next = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.NAME, "next"))
+                )
+            finally:
+                next_btn = driver.find_element_by_name('next')
+                next_btn.click()
+                print('next page')
+        
+        else:
+            filename = time.strftime('%Y%m%d-%H%M%S')
+            myFile = open(filename, 'w')
+            with myFile:
                 writer = csv.writer(myFile)
                 writer.writerows(transactions)
-        
-        # for h in headings.find_elements_by_xpath('.//tr'):
-        #     transactions.append([td.text for td in h.find_elements_by_xpath('.//td')])
-        # print(transactions)
 
-        # print(list(even_rows[0].text))
-
-        # for col in even_rows:
-
-        #     tran_id = 
-        #     tran_date = 
-        #     status = 
-        #     filer = 
-        #     payee = 
-        #     sub_type = 
-        #     amount = 
-            
-        # for col in odd_rows:
-        #     print(col.text)
-
-        
-        #Download the excel file
-        # download  = driver.find_element_by_link_text('Export To Excel Format').get_attribute('href')
-        # print(download)
-        # filename = urllib.request.urlretrieve(str(download))
-        # open(filename[0])
-
-        # download.click()
         print('file-downloaded')
 
-        # print(start)
-        # print(end)
-        # print(search_button)
-
-# //TODO: if table is less then 1 then stop the job
-# //TODO: click the next button after the file has been written
 # //TODO: change the name of the file to [month][day][year][hour][minutes]
 # //TODO: Write test coverage plan
 # //TODO: Write loading script template for csv files to postgres db
