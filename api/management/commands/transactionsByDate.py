@@ -54,15 +54,16 @@ class Command(BaseCommand):
 
         #Clear form input by default and input start and end dates
         start.clear()
-        start.send_keys('01/01/2016')
+        start.send_keys('06/10/2019')
         end.clear()
-        end.send_keys('01/02/2016')
+        end.send_keys('06/14/2019')
             
         #click search button
         search_button.click()
         print('searching specified dates')
         
         table = driver.find_element_by_tag_name('tr')
+        next_btn = driver.find_element_by_name('next')
 
         transactions = []
 
@@ -94,14 +95,15 @@ class Command(BaseCommand):
         
         else:
             filename = time.strftime('%Y%m%d-%H%M%S')
-            myFile = open(filename, 'w')
+            myFile = open('{}.csv'.format(filename), 'w')
             with myFile:
                 writer = csv.writer(myFile)
-                writer.writerows(transactions)
+                writer.writerows(
+                    transactions
+            )
 
-        print('file-downloaded')
+        print('Records downloaded to {}.csv'.format(filename))
 
-# //TODO: change the name of the file to [month][day][year][hour][minutes]
 # //TODO: Write test coverage plan
 # //TODO: Write loading script template for csv files to postgres db
 # //TODO: Write chron job to run process once a day
