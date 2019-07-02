@@ -54,9 +54,9 @@ class Command(BaseCommand):
 
         #Clear form input by default and input start and end dates
         start.clear()
-        start.send_keys('06/10/2019')
+        start.send_keys('06/15/2019')
         end.clear()
-        end.send_keys('06/14/2019')
+        end.send_keys('06/20/2019')
             
         #click search button
         search_button.click()
@@ -78,10 +78,11 @@ class Command(BaseCommand):
             #insert items into a list
             for items in rows:
                 individual = []
-
+                odd_chars = ['$', '"']
                 #insert individual transactions into a list
                 for cell in items.find_elements_by_xpath('.//td'):
-                    individual.append(cell.text)
+                    if odd_chars in cell:
+                        individual.append(cell.text)
                 transactions.append(individual)
 
             try:
@@ -94,10 +95,53 @@ class Command(BaseCommand):
                 print('next page')
         
         else:
+            # header = driver.find_element_by_class_name('shadedHeader')
             filename = time.strftime('%Y%m%d-%H%M%S')
             myFile = open('{}.csv'.format(filename), 'w')
             with myFile:
                 writer = csv.writer(myFile)
+                writer.writerow([
+                    'Trans ID', 
+                    'Original ID', 
+                    'Trans Date', 
+                    'Filer', 
+                    'Payee', 
+                    'SubType', 
+                    'Amount',
+                    'Agg Amount',
+                    'Payee ID',
+                    'Filer ID',
+                    'Attest by Name',
+                    'Attest Date',
+                    'Review by name',
+                    'Review Date',
+                    'Due Date',
+                    'Occptn ltr date',
+                    'Payment Text',
+                    'Purps Desc',
+                    'Interest',
+                    'check_numb',
+                    'trans_status_ind',
+                    'File by Name',
+                    'File Date',
+                    'Address Book Agent',
+                    'Book Type',
+                    'Title Text',
+                    'Occptn TXT',
+                    'emp_name',
+                    'emp_city',
+                    'emp state',
+                    'employeed',
+                    'self employeed',
+                    'Address line 1',
+                    'Address line 2',
+                    'city',
+                    'state',
+                    'zipcode',
+                    'zipplus',
+                    'county',
+                    'purpose code'
+                    ])
                 writer.writerows(
                     transactions
             )
@@ -105,5 +149,6 @@ class Command(BaseCommand):
         print('Records downloaded to {}.csv'.format(filename))
 
 # //TODO: Write test coverage plan
-# //TODO: Write loading script template for csv files to postgres db
-# //TODO: Write chron job to run process once a day
+# //TODO: Rewrite scraper to download, rename and move the excel file
+#// TODO: Rewrite the loading script to match new fields and load from csv file
+#// TODO: Write script to download excel files a week at a time
