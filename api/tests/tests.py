@@ -1,5 +1,5 @@
 from django.test import TestCase, SimpleTestCase, TransactionTestCase
-from api import models
+from ..api import models
 from rest_framework.test import APIClient, RequestsClient
 
 
@@ -10,6 +10,7 @@ from rest_framework.test import APIClient, RequestsClient
 class RootEndpointsTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
+    
     def test_list_200_response(self):
         response = self.client.get('/local-elections/')
         assert response.status_code == 200
