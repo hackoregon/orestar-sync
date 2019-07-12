@@ -10,7 +10,7 @@ import csv
 import time
 
 class Command(BaseCommand):
-    help = 'Selenium Based Scrapper for OreStar'
+    help = 'Pulls the documents from search results'
 
     def handle(self, *args, **kwargs):
         #Open chrome and navigate to webpage
@@ -46,23 +46,30 @@ class Command(BaseCommand):
             print("submitting search query")
         except TimeoutException:
             print("loading took too much time!")
-        
+
         #Grab form and button elements
         start = driver.find_element_by_id('cneSearchTranStartDate')
         end = driver.find_element_by_id('cneSearchTranEndDate')
         search_button = driver.find_element_by_name('search')
 
-        #Clear form input by default and input start and end dates
+                #Clear form input by default and input start and end dates
         start.clear()
-        start.send_keys('06/15/2019')
+        start.send_keys(input('Enter your start date: '))
         end.clear()
-        end.send_keys('06/20/2019')
-            
+        end.send_keys(input('Enter your end date: '))
+
         #click search button
         search_button.click()
         print('searching specified dates')
-        
-        table = driver.find_element_by_tag_name('tr')
-        next_btn = driver.find_element_by_name('next')
+        try:
+            wait = WebDriverWait(driver, 10)
+            element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "shadedHeader")))
+        finally:
+            driver.quit()
+            driver.get(url)
+        print('export available')
+            
+        dwn_load = driver.find_element_by_partial_link_text('Export')
+        dwn_load.click()
+        print('downloading file')
 
-        transactions = []
