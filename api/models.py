@@ -48,3 +48,39 @@ class oreStarData(models.Model):
         managed = True
         verbose_name = 'ModelName'
         verbose_name_plural = 'ModelNames'
+
+class election:
+    candidates = [] #Reference to a list of all candidates that are apart of this election
+    date_range = models.DateField
+    pass
+
+class candidate:
+    candidates_firstname = models.CharField(max_length=200, null=True)
+    candidates_lastname = models.CharField(max_length=200, null=True)
+    contributions = [] #Reference to a list of contributions that this candidate collected
+    pass
+
+class contributor:
+    contributor_firstname = models.CharField(max_length=200, null=True)
+    contributor_lastname = models.CharField(max_length=200, null=True)
+    contributions = [] # Reference to a list of all the contributions made by this contributor
+    candidates = [] # List of all the candidates this contributor donated to
+    pass
+
+class campaign:
+    candidate = [] #Reference to all the candidates in an elections
+    elections = [] #Reference to all the elections
+    contrinbutions = [] #Reference to all elections from this campaign
+    pass
+
+class contribution:
+    election = [] #reference to the election
+    candidate = [] #reference to the candidate
+    contribution_id = models.IntegerField()
+    amount = models.DecimalField()
+    date = models.DateField()
+    pass
+
+class taxonomyTerms:
+    amount_range = ['$0 - $50', '$50 - $250', '$250 - $500', '500+'] # make a selection field
+    pass

@@ -113,3 +113,7 @@ env.production
 temp_models/
 
 *.csv
+
+# Elections Ignores
+/elections_api/__pycache__
+api/__pycache__/__init__.cpython-36.pyc
