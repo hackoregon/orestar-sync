@@ -49,38 +49,36 @@ class oreStarData(models.Model):
         verbose_name = 'ModelName'
         verbose_name_plural = 'ModelNames'
 
-class election:
-    candidates = [] #Reference to a list of all candidates that are apart of this election
-    date_range = models.DateField
-    pass
 
-class candidate:
+class Candidate(models.Model):
     candidates_firstname = models.CharField(max_length=200, null=True)
     candidates_lastname = models.CharField(max_length=200, null=True)
-    contributions = [] #Reference to a list of contributions that this candidate collected
     pass
 
-class contributor:
+class election(models.Model):
+    candidates = models.ForeignKey(Candidate, on_delete=models.CASCADE) #Reference to a list of all candidates that are apart of this election
+    date_range = models.DateField
+    pass
+class contribution(models.Model):
+    election = models.ForeignKey(election, on_delete=models.CASCADE) #reference to the election
+    contribution_id = models.IntegerField()
+    amount = models.CharField(max_length=255)
+    date = models.CharField(max_length=255)
+    pass
+class contributor(models.Model):
     contributor_firstname = models.CharField(max_length=200, null=True)
     contributor_lastname = models.CharField(max_length=200, null=True)
-    contributions = [] # Reference to a list of all the contributions made by this contributor
-    candidates = [] # List of all the candidates this contributor donated to
+    contributions = models.ForeignKey(contribution, on_delete=models.CASCADE) # Reference to a list of all the contributions made by this contributor
+    candidates = models.ForeignKey(Candidate, on_delete=models.CASCADE) # List of all the candidates this contributor donated to
     pass
 
-class campaign:
-    candidate = [] #Reference to all the candidates in an elections
-    elections = [] #Reference to all the elections
-    contrinbutions = [] #Reference to all elections from this campaign
+class campaign(models.Model):
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE) #Reference to all the candidates in an elections
+    elections = models.ForeignKey(election, on_delete=models.CASCADE) #Reference to all the elections
+    contrinbutions = models.ForeignKey(contribution, on_delete=models.CASCADE) #Reference to all elections from this campaign
     pass
 
-class contribution:
-    election = [] #reference to the election
-    candidate = [] #reference to the candidate
-    contribution_id = models.IntegerField()
-    amount = models.DecimalField()
-    date = models.DateField()
-    pass
 
-class taxonomyTerms:
-    amount_range = ['$0 - $50', '$50 - $250', '$250 - $500', '500+'] # make a selection field
-    pass
+# class taxonomyTerms(models.Model):
+#     amount_range = ['$0 - $50', '$50 - $250', '$250 - $500', '500+'] # make a selection field
+#     pass
