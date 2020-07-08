@@ -16,7 +16,7 @@ Orestar is a publically funded collection of Oregon State election financing dat
 ```
 
 ## Run WebScraper
-In order to scrap orestar website
+In order to scrape OreStar website
 adjust the following lines to the appropriate date save and run the command below.
 ```
 python manage.py transactionsByDate
