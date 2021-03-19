@@ -16,7 +16,7 @@ django-nose==1.4.5
 django-postgres-copy==2.4.1
 django-rest-swagger==2.2.0
 django-test-without-migrations==0.6
-djangorestframework==3.7.7
+djangorestframework==3.11.2
 djangorestframework-gis==0.12
 execnet==1.6.0
 idna==2.6
