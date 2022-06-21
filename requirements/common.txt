@@ -38,6 +38,6 @@ pytest-xdist
 
 # elections
 networkx==2.1
-numpy==1.14.5
+numpy==1.22.0
 pandas==0.22.0
 
